@@ -1,21 +1,6 @@
 <?php
 
-function exibeMensagemLancamento(int $ano)
-{
-    if ($ano > 2022)
-    {
-        echo "Esse filme é um lançamento";
-    } elseif($ano > 2022 && $ano <= 2022) {
-        echo "Esse filme ainda é novo";
-    } else {
-        echo "Esse filme não é um lançamento";
-    }
-}
-
-function incluidoNoPlano(bool $planoPrime, int $anoLancamento): bool
-{
-    return $planoPrime || $anoLancamento < 2020;
-}
+require __DIR__ . "/src/funcoes.php";
 
 echo "Bem-vindo(a) ao screen match!\n";
 
@@ -50,12 +35,22 @@ $genero = match ($nomeFilme) {
 
 echo "O gênero do filme é: $genero\n";
 
-$filme = [
-    "nome" => "Interestelar",
-    "ano" => 2015,
-    "nota" => 9.9,
-    "genero" => "ficção",
-];
+$filme = criaFilme("Interestelar", 2015, 9.9, "ficção");
 
 
 echo $filme["ano"];
+
+var_dump($notas);
+sort($notas);
+var_dump($notas);
+$menorNota = min($notas);
+var_dump($menorNota);
+
+var_dump($filme['nome']);
+$posicaoDoisPontos = strpos($filme['nome'], ':');
+var_dump($posicaoDoisPontos);
+
+var_dump(substr($filme['nome'], 0, $posicaoDoisPontos));
+
+$filmeComoStringJson = json_encode($filme);
+file_put_contents(__DIR__ . '/filme.json', $filmeComoStringJson);
